@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        function getRandNum(min, max){
+
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        };
+
+
+        function getRandomArr(min, max, numOfElem){
+
+            var arr = [];
+
+            while (arr.length < 5){
+
+                var randNum = getRandNum(min, max);
+
+                if (!arr.includes(randNum)){
+
+                    arr.push(randNum)
+                }
+            };
+
+            return arr
+        };
+
+        function displayPrompts(array){
+
+            var usrGuessRight = [];
+
+            for (i=0; i<array.length; i++){
+
+                var usrGuess = parseInt(prompt('numero?'));
+
+                if (array.includes(usrGuess)){
+
+                    usrGuessRight.push(usrGuess)
+                }
+            };
+
+            return usrGuessRight
+        };
+
+        function endGame(arr1, arr2){
+
+            if (arr1.length == arr2.length){
+
+                console.log('you rembered every number');
+            }
+            else{
+
+                console.log('you remebered ' + arr1.length + ' num: ' + arr1);
+                console.log('missed numbers: ' + arr2.filter(el => !arr1.includes(el)));
+            };
+        }
+
+
+        function init(){
+
+            var exMin = 1;
+            var exMax = 100;
+            var exNumOfElem = 5;
+
+            var randArr = getRandomArr(exMin, exMax, exNumOfElem);
+            alert(randArr);
+            
+            function recallFunc(){
+
+                var usrArr = displayPrompts(randArr)
+                endGame(usrArr, randArr);
+            };
+
+            setTimeout(recallFunc, 30000);
+        };
+
+        init();
+
+
+    </script>
+    
+</body>
+</html>
